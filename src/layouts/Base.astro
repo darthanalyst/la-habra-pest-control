@@ -1,0 +1,58 @@
+---
+import '../styles/global.css';
+import { phoneDisplay, phoneHref, navPages, siteName, siteUrl } from '../data/site';
+const { title, description, canonical = siteUrl + Astro.url.pathname, image = '/images/technician.jpg', jsonLd = [] } = Astro.props;
+const fullTitle = title === siteName ? title : `${title} | ${siteName}`;
+const data = Array.isArray(jsonLd) ? jsonLd : [jsonLd];
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#102016" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={siteUrl + image} />
+    {data.map((item) => <script type="application/ld+json" set:html={JSON.stringify(item)} />)}
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="La Habra Pest Control home">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M32 8 52 17v13c0 13-8 22-20 28C20 52 12 43 12 30V17Z"/><path d="M24 24c0-5 4-9 8-9s8 4 8 9v14c0 5-4 9-8 9s-8-4-8-9Z"/><path d="M20 29h24M21 37h22M32 16v31M18 23l-5-4M46 23l5-4M18 43l-5 4M46 43l5 4"/></svg></span>
+        <span><strong>La Habra Pest Control</strong><small>Home, rental, and small business pest help</small></span>
+      </a>
+      <nav class="nav" aria-label="Primary navigation">
+        {navPages.map((p) => <a href={p.href}>{p.label}</a>)}
+      </nav>
+      <a class="header-call" href={phoneHref}>Call {phoneDisplay}</a>
+    </header>
+    <main><slot /></main>
+    <footer class="footer">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand"><span class="mini-bug"></span><strong>La Habra Pest Control</strong></div>
+          <p>Call with the pest type, where you saw it, how long it has been active, and whether it is inside, outside, or both.</p>
+          <a class="footer-phone" href={phoneHref}>{phoneDisplay}</a>
+        </div>
+        <div>
+          <h2>Services</h2>
+          <ul>{navPages.slice(1,7).map((p) => <li><a href={p.href}>{p.label}</a></li>)}</ul>
+        </div>
+        <div>
+          <h2>Local pages</h2>
+          <ul><li><a href="/areas-served/">Areas served</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li><li><a href="/sitemap.xml">Sitemap</a></li></ul>
+        </div>
+      </div>
+      <div class="disclosure">This website helps connect La Habra callers with pest-control service providers. Service details, availability, inspections, treatment options, and pricing should be confirmed by phone. <a href="/sitemap.xml">Sitemap</a></div>
+    </footer>
+    <a class="sticky-call" href={phoneHref}>Call {phoneDisplay}</a>
+  </body>
+</html>

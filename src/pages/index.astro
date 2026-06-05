@@ -1,0 +1,105 @@
+---
+import Base from '../layouts/Base.astro';
+import { phoneDisplay, phoneHref, siteUrl, siteName, services } from '../data/site';
+const title = 'Pest Control in La Habra, CA';
+const description = 'Call La Habra Pest Control for ants, roaches, rodents, spiders, termite concerns, and commercial pest questions in La Habra.';
+const faqs = [
+  ['What should I say when I call?', 'Start with the pest you saw, where it appeared, how long it has been active, and whether it is inside, outside, or both. Mention children, pets, food areas, tenants, or business hours if those affect timing.'],
+  ['Can I ask about ants, roaches, rodents, spiders, and termites on one call?', 'Yes. A short description of each concern helps the provider decide whether you need a general inspection, a pest-specific visit, or a separate termite inspection.'],
+  ['Do I need to clean everything before calling?', 'No. Call first if you are unsure. For many pest problems, the location of droppings, trails, webs, wings, or entry gaps helps the inspection. You can ask what to move, clean, photograph, or leave untouched.'],
+  ['Does the site show a walk-in office?', 'No public walk-in address is listed here. Call to confirm service area, appointment timing, inspection scope, and any provider details before scheduling.'],
+  ['Do La Habra businesses call the same number?', 'Yes. Restaurants, small retail shops, offices, churches, property managers, and light commercial spaces can call and describe the pest concern, hours, access points, and service timing needs.']
+];
+const jsonLd = [
+  { '@context':'https://schema.org', '@type':'Organization', name: siteName, url: siteUrl, telephone: phoneDisplay, contactPoint: [{ '@type':'ContactPoint', telephone: phoneDisplay, contactType:'customer service', areaServed:'La Habra, CA' }] },
+  { '@context':'https://schema.org', '@type':'WebSite', name: siteName, url: siteUrl, potentialAction: { '@type':'CommunicateAction', target: phoneHref } },
+  { '@context':'https://schema.org', '@type':'FAQPage', mainEntity: faqs.map(([q,a]) => ({ '@type':'Question', name:q, acceptedAnswer:{ '@type':'Answer', text:a }})) }
+];
+---
+<Base title={title} description={description} canonical={siteUrl + '/'} jsonLd={jsonLd}>
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <span class="eyebrow">La Habra pest help by phone</span>
+        <h1>Pest Control in La Habra, CA</h1>
+        <p class="lead">Call about ants in kitchens, roaches near cabinets, rodents in the attic or garage, spider activity, termite or wood damage concerns, fleas, ticks, mosquitoes, and commercial pest problems.</p>
+        <div class="hero-list">
+          <span>Tell us what you saw and where it appeared.</span>
+          <span>Ask about inspection, timing, service area, and treatment options.</span>
+          <span>No form to fill out before you can explain the problem.</span>
+          <span>Local focus for La Habra homes, rentals, garages, yards, and businesses.</span>
+        </div>
+        <a class="btn" href={phoneHref}>Call {phoneDisplay}</a>
+      </div>
+      <aside class="hero-panel">
+        <h2>When you call, mention these details</h2>
+        <p>A short, specific call helps the provider understand the pest pressure before anyone arrives.</p>
+        <ul>
+          <li>The pest type, or what it looks like if you are not sure.</li>
+          <li>The room, attic, garage, patio, wall, drain, or business area involved.</li>
+          <li>How long it has been active and whether it is getting worse.</li>
+          <li>Children, pets, food areas, tenants, or business hours that affect timing.</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Common La Habra pest problems people call about</h2>
+    <p class="section-intro">The first job of the site is to help a caller describe the problem clearly. Each service page below explains signs to look for, questions to ask, and what kind of property details matter.</p>
+    <div class="grid">
+      {services.map((s) => <article class="card"><h3>{s.h1.replace(', CA','')}</h3><p>{s.problem}. {s.local}</p><a class="read" href={`/${s.slug}/`}>Read the {s.pest} page</a></article>)}
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="photo-row">
+      <div>
+        <h2>Why La Habra properties need practical pest help</h2>
+        <p>La Habra sits where Orange County neighborhoods meet older Los Angeles County edge communities. That means a mix of stucco homes, slab foundations, detached garages, older rental units, small restaurants, alley access, irrigated yards, fruit trees, block walls, patio covers, and rooflines that can give pests shelter. A pest problem can start outside and become an indoor issue once heat, rain, yard watering, food, or storage gives pests a reason to move.</p>
+        <p>Ants can follow plumbing lines and patio cracks into kitchens. Roaches can hide near warm appliances, cabinet voids, drains, and shared walls. Rats and mice can use roof edges, garage gaps, vines, fruit trees, and utility openings. Spiders stay where insects gather around lights, eaves, boxes, and patio furniture. Termite concerns need careful inspection before anyone talks about treatment choices.</p>
+        <p>Good calls are specific. Instead of saying there are bugs everywhere, say where they are active, when you notice them, and what has already been tried. That gives the person on the phone a better chance to talk through timing, inspection needs, preparation, and whether the property is inside the current service area.</p>
+      </div>
+      <figure class="photo"><img src="/images/spray.jpg" alt="Pest control technician treating an exterior wall area" loading="lazy" /></figure>
+    </div>
+  </section>
+
+  <section class="section dark">
+    <h2>What happens after the call starts</h2>
+    <p class="section-intro">You do not need to diagnose the pest perfectly. Use the call to explain what you are seeing and ask direct questions before you schedule.</p>
+    <div class="grid two">
+      <div class="step"><h3>1. Describe the evidence</h3><p>Say whether you found trails, droppings, scratching, webs, wings, pellets, bites, odor, damaged wood, or repeat activity after cleaning. Mention the exact area of the property.</p></div>
+      <div class="step"><h3>2. Ask about the inspection</h3><p>Ask what areas are usually checked for that pest, whether photos help, what to leave in place, and whether attic, garage, yard, or business access is needed.</p></div>
+      <div class="step"><h3>3. Talk through timing</h3><p>Ask about appointment windows, what should happen before treatment, when people or pets can use treated spaces, and whether follow-up is common for that pest.</p></div>
+      <div class="step"><h3>4. Confirm the service area</h3><p>Give the La Habra address area or nearest cross streets. If you are near Brea, Fullerton, Whittier, La Mirada, or Buena Park, ask whether service is available there.</p></div>
+    </div>
+    <div class="cta-band"><div><h2>Ready to explain what you found?</h2><p>Call and describe the pest, the room or exterior area, and how long it has been active.</p></div><a class="btn dark" href={phoneHref}>Call {phoneDisplay}</a></div>
+  </section>
+
+  <section class="section">
+    <h2>Residential and commercial pest concerns</h2>
+    <div class="grid two">
+      <div class="trust-card"><h3>Homes, rentals, garages, and yards</h3><p>Call about kitchen ants, roaches near appliances, rodents in storage areas, spiders around eaves, flea or tick concerns after pets use the yard, mosquitoes near standing water, or termite signs around trim and patio covers. Mention pets, children, recent cleaning, and where activity keeps returning.</p></div>
+      <div class="trust-card"><h3>Restaurants, shops, offices, and small buildings</h3><p>Business calls should include the building type, open hours, pest location, staff or customer sightings, food or storage areas, trash areas, shared walls, and whether documentation is needed. Ask about service windows that reduce disruption.</p></div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <h2>La Habra and nearby service questions</h2>
+    <p class="section-intro">The core focus is La Habra, including 90631 and nearby 90632 and 90633 mailing areas shown in the legacy sitemap. Nearby communities may be available depending on scheduling and provider coverage.</p>
+    <ul class="checklist">
+      <li>La Habra homes near older garages, patio covers, citrus trees, block walls, and irrigated yards.</li>
+      <li>Apartments, duplexes, townhomes, and rental properties where shared walls or neighboring units can affect pest movement.</li>
+      <li>Businesses along commercial corridors, strip centers, restaurant rows, offices, churches, and light industrial spaces.</li>
+      <li>Nearby edges of Brea, Fullerton, Whittier, La Mirada, Buena Park, and other close communities when service coverage allows.</li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>Frequently asked questions</h2>
+    <div class="faq">
+      {faqs.map(([q,a]) => <details><summary>{q}</summary><p>{a}</p></details>)}
+    </div>
+    <div class="cta-band"><div><h2>Call before the problem spreads</h2><p>Ask about inspection, service timing, preparation, treatment options, and whether your address is covered.</p></div><a class="btn dark" href={phoneHref}>Call {phoneDisplay}</a></div>
+  </section>
+</Base>

@@ -1,0 +1,21 @@
+# La Habra Pest Control
+
+La Habra Pest Control is a call-focused pest-control information site for homeowners, tenants, property managers, and local businesses in and near La Habra, California. The site explains common pest problems, service questions to ask by phone, and practical next steps for ants, roaches, rodents, spiders, termites, and commercial pest concerns.
+
+Core URLs:
+- https://lahabrapestcontrol.com/
+- https://lahabrapestcontrol.com/ant-control/
+- https://lahabrapestcontrol.com/roach-control/
+- https://lahabrapestcontrol.com/rodent-control/
+- https://lahabrapestcontrol.com/spider-control/
+- https://lahabrapestcontrol.com/termite-control/
+- https://lahabrapestcontrol.com/commercial-pest-control/
+- https://lahabrapestcontrol.com/areas-served/
+- https://lahabrapestcontrol.com/about/
+- https://lahabrapestcontrol.com/contact/
+
+Phone: (949) 339-1111
+
+Discovery: https://lahabrapestcontrol.com/sitemap.xml
+
+Disclosure: This website helps connect La Habra callers with pest-control service providers. Callers should confirm service details, availability, inspection scope, treatment options, and pricing by phone.

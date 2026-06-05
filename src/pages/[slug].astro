@@ -1,0 +1,99 @@
+---
+import Base from '../layouts/Base.astro';
+import { pages, services, phoneDisplay, phoneHref, siteUrl, siteName } from '../data/site';
+export async function getStaticPaths() { return pages.map((page) => ({ params: { slug: page.slug }, props: { page } })); }
+const { page } = Astro.props;
+const related = services.filter((s) => s.slug !== page.slug).slice(0, 3);
+const isUtility = ['about','contact','areas-served'].includes(page.slug);
+const secondaryImg = page.img === '/images/technician.jpg' ? '/images/spray.jpg' : '/images/technician.jpg';
+const faqs = [
+  [`What should I say when I call about ${page.pest}?`, `For ${page.h1}, describe the evidence, the exact area of the property, how long it has been happening, and whether it is inside, outside, or both. If you have pets, tenants, children, food areas, or business hours to consider, mention that during the call.`],
+  [`Do I need an inspection for ${page.pest}?`, `For ${page.h1}, ask by phone. Some concerns can be discussed from clear evidence, while others need a closer look before treatment options make sense. The caller should ask what parts of the property need attention before treatment choices are discussed.`],
+  [`What can I ask about before scheduling ${page.pest} service?`, `For ${page.h1}, ask about service area, timing, preparation, access, treatment choices, follow-up expectations, and what you should leave visible for the inspection. Photos of pest evidence may help if they can be taken safely.`],
+  [`Is there a form for ${page.pest}?`, `No. For ${page.h1}, call the number on this page so you can explain the issue directly and ask about next steps without waiting for a form response.`]
+];
+const jsonLd = [
+  { '@context':'https://schema.org', '@type':'Organization', name: siteName, url: siteUrl, telephone: phoneDisplay, contactPoint: [{ '@type':'ContactPoint', telephone: phoneDisplay, contactType:'customer service', areaServed:'La Habra, CA' }] },
+  { '@context':'https://schema.org', '@type':'WebPage', name: page.title, url: `${siteUrl}/${page.slug}/`, description: page.meta, isPartOf: { '@type':'WebSite', name: siteName, url: siteUrl } },
+  { '@context':'https://schema.org', '@type':'FAQPage', mainEntity: faqs.map(([q,a]) => ({ '@type':'Question', name:q, acceptedAnswer:{ '@type':'Answer', text:a }})) }
+];
+---
+<Base title={page.title} description={page.meta} canonical={`${siteUrl}/${page.slug}/`} image={page.img} jsonLd={jsonLd}>
+  <section class="service-hero">
+    <div class="wrap">
+      <div>
+        <span class="kicker">La Habra pest service questions</span>
+        <h1>{page.h1}</h1>
+        <p class="lead">Call about {page.problem}. Explain what you found, where it appeared, and what you want to know about inspection, timing, service area, and treatment options.</p>
+        <a class="btn" href={phoneHref}>Call {phoneDisplay}</a>
+      </div>
+      <img src={page.img} alt={`Pest control service scene for ${page.pest} concerns`} />
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Signs worth mentioning on the call</h2>
+    <p class="section-intro">The person answering the phone can give better next steps when the caller explains the evidence clearly. For {page.pest}, focus on what you saw, when it happens, and what part of the property is involved.</p>
+    <div class="grid two">
+      {page.evidence.map((item) => <article class="card"><h3>{item[0].toUpperCase() + item.slice(1)}</h3><p>{page.local} If you notice {item}, call and ask what the inspection should include before anyone treats the property.</p></article>)}
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="photo-row">
+      <div>
+        <h2>Why this problem shows up around La Habra</h2>
+        <p>{page.local} For {page.h1}, local homes and small buildings often have a mix of slab edges, stucco cracks, block walls, utility penetrations, tight cabinet plumbing, roofline gaps, patio covers, fruit trees, shaded storage, and irrigated landscape beds. Those features do not mean a property is dirty. They simply give {page.pest} travel routes, moisture, warmth, shelter, or food sources.</p>
+        <p>For {page.h1}, many callers wait until the problem feels embarrassing or out of control. Calling earlier is usually better because the evidence is easier to track. Describe the exact sign that made you concerned, whether it is movement, droppings, trails, sounds, damage, webs, wings, odor, or repeat activity after cleaning.</p>
+        <p>When discussing {page.h1}, ask whether the provider needs access to the attic, garage, side yard, kitchen cabinets, drains, patio, trash area, storage room, or business back door. Ask what should be moved and what should be left alone. If you already used store products, mention what was used and when. That detail can affect inspection, treatment choices, and follow-up timing.</p>
+      </div>
+      <figure class="photo"><img src={secondaryImg} alt={`${page.h1} inspection context`} loading="lazy" /></figure>
+    </div>
+  </section>
+
+  <section class="section dark">
+    <h2>What to have ready before you call</h2>
+    <p class="section-intro">For {page.h1}, you do not need a perfect diagnosis. These details help the call stay useful and help you ask better questions about {page.pest} before service is scheduled.</p>
+    <ul class="checklist">
+      {page.prep.map((item) => <li>{item}</li>)}
+      <li>Ask whether photos of droppings, trails, webs, damaged wood, entry gaps, or pest activity would help.</li>
+      <li>Ask what to do with pets, children, tenants, food areas, and business hours before service.</li>
+    </ul>
+    <div class="cta-band"><div><h2>Talk through {page.pest} by phone</h2><p>For {page.h1}, call with the evidence, property type, nearest cross streets, and the questions you want answered before scheduling.</p></div><a class="btn dark" href={phoneHref}>Call {phoneDisplay}</a></div>
+  </section>
+
+  <section class="section">
+    <h2>How this page helps different properties</h2>
+    <div class="grid">
+      <article class="trust-card"><h3>Homeowners</h3><p>For {page.h1}, describe the room, wall, ceiling, yard, garage, or patio area where activity appears. Ask what the inspection looks for and whether routine service makes sense after the active issue is handled.</p></article>
+      <article class="trust-card"><h3>Renters and property managers</h3><p>For {page.h1}, mention shared walls, neighboring units, maintenance access, tenant schedules, storage rooms, and whether management needs a clear explanation of what was found.</p></article>
+      <article class="trust-card"><h3>Local businesses</h3><p>For {page.h1}, explain business hours, customer areas, food or storage rooms, trash areas, doors, drains, deliveries, and whether service needs to happen before opening or after closing.</p></article>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <h2>Questions to ask about {page.pest}</h2>
+    <div class="grid two">
+      <div class="card"><h3>Inspection and treatment</h3><p>For {page.h1}, ask which areas should be checked, whether the concern normally starts indoors or outdoors, and what treatment options may be discussed after the inspection. Termite concerns, rodent issues, and commercial pest activity each need different questions before a visit.</p></div>
+      <div class="card"><h3>Timing and preparation</h3><p>For {page.h1}, ask how soon service may be available, what should be moved, what should stay visible, how children or pets are handled around service areas, and whether follow-up is common. If the property is a business, ask about service windows that reduce disruption.</p></div>
+      <div class="card"><h3>Service area</h3><p>For {page.h1}, give the nearest La Habra cross streets or nearby community. The core service focus is La Habra, with nearby Brea, Fullerton, Whittier, La Mirada, and Buena Park questions handled by phone when coverage allows.</p></div>
+      <div class="card"><h3>What not to guess</h3><p>For {page.h1}, do not invent the pest species if you are unsure. Describe size, color, droppings, sounds, damage, trails, webs, wings, odor, or location. A clear description is more useful than a confident guess.</p></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Related La Habra pest pages</h2>
+    <p class="section-intro">For {page.h1}, related pest problems can overlap because moisture, storage, food, openings, lights, and yard cover can support more than one issue at the same property.</p>
+    <div class="grid">
+      {related.map((s) => <article class="card"><h3>{s.h1.replace(', CA','')}</h3><p>If {s.h1.replace(', CA','').toLowerCase()} signs also show up while you are reviewing {page.h1.toLowerCase()}, compare the evidence and call with both details. The phone conversation can help decide which issue needs attention first.</p><a class="read" href={`/${s.slug}/`}>Read more</a></article>)}
+    </div>
+  </section>
+
+  <section class="section alt">
+    <h2>Frequently asked questions</h2>
+    <div class="faq">
+      {faqs.map(([q,a]) => <details><summary>{q}</summary><p>{a}</p></details>)}
+    </div>
+    <div class="cta-band"><div><h2>{isUtility ? 'Call with your La Habra pest question' : `Call about ${page.pest} in La Habra`}</h2><p>Explain what you saw, where you saw it, and what you need to know before the next step.</p></div><a class="btn dark" href={phoneHref}>Call {phoneDisplay}</a></div>
+  </section>
+</Base>
