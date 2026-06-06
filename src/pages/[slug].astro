@@ -5,7 +5,7 @@ export async function getStaticPaths() { return pages.map((page) => ({ params: {
 const { page } = Astro.props;
 const related = services.filter((s) => s.slug !== page.slug).slice(0, 3);
 const isUtility = ['about','contact','areas-served'].includes(page.slug);
-const secondaryImg = page.img === '/images/technician.jpg' ? '/images/spray.jpg' : '/images/technician.jpg';
+const secondaryImg = page.img === '/images/la-habra-pest-hero.webp' ? '/images/la-habra-exterior-inspection.webp' : '/images/la-habra-pest-hero.webp';
 const faqs = [
   [`What should I say when I call about ${page.pest}?`, `For ${page.h1}, describe the evidence, the exact area of the property, how long it has been happening, and whether it is inside, outside, or both. If you have pets, tenants, children, food areas, or business hours to consider, mention that during the call.`],
   [`Do I need an inspection for ${page.pest}?`, `For ${page.h1}, ask by phone. Some concerns can be discussed from clear evidence, while others need a closer look before treatment options make sense. The caller should ask what parts of the property need attention before treatment choices are discussed.`],

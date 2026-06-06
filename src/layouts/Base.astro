@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 import { phoneDisplay, phoneHref, navPages, siteName, siteUrl } from '../data/site';
-const { title, description, canonical = siteUrl + Astro.url.pathname, image = '/images/technician.jpg', jsonLd = [] } = Astro.props;
+const { title, description, canonical = siteUrl + Astro.url.pathname, image = '/images/la-habra-pest-hero.webp', jsonLd = [] } = Astro.props;
 const fullTitle = title === siteName ? title : `${title} | ${siteName}`;
 const data = Array.isArray(jsonLd) ? jsonLd : [jsonLd];
 ---
